@@ -4,9 +4,12 @@ import Sidebar from './components/Sidebar';
 import Dashboard from './components/Dashboard';
 import Topbar from './components/Topbar';
 import User from './components/User'
+import UserCreate from './components/UserCreate'
+import { UserProvider } from './components/UserContext';
 
 function App() {
   return (
+    <UserProvider>
       <BrowserRouter>
      <div className="App">
       <div id="wrapper">
@@ -16,8 +19,9 @@ function App() {
         <Topbar/>
         <div className="container-fluid">
         <Switch>
-         <Route exact={true} path="/" component={ Dashboard } />
-         <Route exact={true} path="/user" component={ User } />
+         <Route  path="/" exact={true} component={ Dashboard } />
+         <Route  path="/user" exact={true} component={ User } />
+         <Route  path="/user-create" exact={true} component={ UserCreate } />
         </Switch>
         </div>
       </div>
@@ -25,7 +29,8 @@ function App() {
       </div>
      </div>
     </BrowserRouter>
+    </UserProvider>
  );
-}
+} 
 
 export default App;
