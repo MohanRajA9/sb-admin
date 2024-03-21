@@ -1,12 +1,27 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import { useHistory } from 'react-router-dom'
+import { UserContext } from './UserContext'
 
 function UserCreate() {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [phone, setPhone] = useState("")
+    const history = useHistory()
+    const data = useContext(UserContext) //subscription
+    console.log(data)//{userData: Array(0), setUserData: ƒ}
 
     const handleClick = () => {
-        console.log(name,email,phone)
+        // console.log(name, email, phone)
+        const newUserData = {
+            name,
+            email,
+            phone
+        }
+        console.log(newUserData)
+        //copy userData and add newUserData
+        data.setUserData([...data.userData, newUserData])
+        console.log("data", data.userData)
+        history.push("/user")
     }
     return (
         <div className="container" >
@@ -29,8 +44,8 @@ function UserCreate() {
 
                 <div className="col-lg-12" >
                     <label>Phone</label>
-                    <input type="number" name="phone" id="phone" className="form-control" 
-                    onChange={ (e) => {setPhone(e.target.value)} }/>
+                    <input type="number" name="phone" id="phone" className="form-control"
+                        onChange={(e) => { setPhone(e.target.value) }} />
                 </div>
 
             </div>
